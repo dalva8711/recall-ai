@@ -38,12 +38,12 @@ function fetchLogsForToday(callback) {
 function formatLogs(logs) {
   let content = `Summarize this user activity for ${getTodayDate()} in natural language.\n\n`;
 
-  content += "📱 App Activity:\n";
+  content += "App Activity:\n";
   logs.apps.forEach(log => {
     content += `• [${log.timestamp}] ${log.app} - ${log.title}\n`;
   });
 
-  content += "\n🌐 Browser Activity:\n";
+  content += "\nBrowser Activity:\n";
   logs.tabs.forEach(log => {
     content += `• [${log.timestamp}] ${log.title} - ${log.url}\n`;
   });
@@ -74,14 +74,14 @@ function saveSummary(summary) {
   const outPath = path.join(__dirname, `summaries/${getTodayDate()}.md`);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, summary);
-  console.log(`✅ Summary saved to ${outPath}`);
+  console.log(`Summary saved to ${outPath}`);
 }
 
 fetchLogsForToday(async (err, logs) => {
-  if (err) return console.error('❌ Error fetching logs:', err);
+  if (err) return console.error('Error fetching logs:', err);
 
   const summary = await summarizeWithClaude(logs);
-  console.log('\n📋 DAILY SUMMARY:\n');
+  console.log('\nDAILY SUMMARY:\n');
   console.log(summary);
 
   saveSummary(summary);
