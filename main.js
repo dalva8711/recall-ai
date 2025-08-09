@@ -7,7 +7,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const { logActiveWindow } = require('./logger/activityLogger');
-const { startServer } = require('./logger/browserLogger');
 
 /**
  * Creates and configures the main application window.
@@ -42,8 +41,6 @@ app.whenReady().then(() => {
 
     // Log active window every 15 secs
     setInterval(logActiveWindow, 15 * 1000);
-
-    startServer();
 
     // On macOS, re-create window when dock icon is clicked and no windows are open
     app.on('activate', () => {
