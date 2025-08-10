@@ -4,3 +4,4 @@ node_modules/
 .env
 logger/activity.db
 summaries/
+logger/credentials.json
